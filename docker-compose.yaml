@@ -1,0 +1,27 @@
+services:
+
+  retropie:
+    image: lasery/retropie:latest
+    container_name: retropie
+    command: 'run'
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    environment:
+    - PULSE_SERVER=unix:/run/user/1000/pulse/native
+    group_add:
+    - video
+    volumes:
+    - /run/user/1000:/run/user/1000
+    - /opt/vc:/opt/vc 
+    - /var/run/dbus/:/var/run/dbus/      
+    - /dev/snd:/dev/snd
+    - /dev/input:/dev/input        
+    - /dev/vchiq:/dev/vchiq
+    - /dev/vcio:/dev/vcio
+    - /dev/fb0:/dev/fb0
+    - /dev/vcsm:/dev/vcsm
+    - ${PWD}/roms:/home/pi/RetroPie/roms
+    - ${PWD}/config/emulationstation/:/home/pi/.emulationstation/
+    - ${PWD}/config/autoconfig/:/opt/retropie/configs/all/retroarch/autoconfig/
+    #- ${PWD}/config/retroarch.cfg:/opt/retropie/configs/all/retroarch.cfg
