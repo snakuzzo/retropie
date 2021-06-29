@@ -7,8 +7,11 @@ services:
     restart: unless-stopped
     privileged: true
     network_mode: host
+    user: "1000:1000"
     environment:
     - PULSE_SERVER=unix:/run/user/1000/pulse/native
+    - DISPLAY=unix$DISPLAY
+    - TERM=xterm
     group_add:
     - video
     volumes:
